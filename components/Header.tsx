@@ -1,9 +1,9 @@
 import { Backpack } from "./Backpack";
 
 export const Header = () => (
-  <div className="flex items-center m-16">
+  <header className="flex items-center justify-between w-full">
     <Backpack />
-    <span className="w-8" />
-    <h1 className="text-6xl inline font-bold">World Explorer</h1>
-  </div>
+   
+    <h1 className="text-2xl md:text-6xl inline font-bold">World Explorer</h1>
+  </header>
 );

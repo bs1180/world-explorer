@@ -2,12 +2,13 @@ import { useMemo } from "react";
 import { useFetchCountries } from "./useFetchCountries";
 import { pipe, filter, take, sortBy, toLower, prop, compose } from 'ramda'
 
-const sortByName = sortBy(compose(toLower, prop('name')));
-
 const MAX_RESULTS = 10
 
+export const filterByName = term => c => new RegExp(term, 'i').test(c.name)
+export const sortByName = sortBy(compose(toLower, prop('name')));
+
 const filterResults = (term: string) => pipe(
-  filter(c => new RegExp(term, 'i').test(c.name)),
+  filter(filterByName(term)),
   take(MAX_RESULTS),
   sortBy(sortByName)
 )

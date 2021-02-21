@@ -9,6 +9,8 @@ export type Country = {
   nativeName: string;
   languages: string[];
   states: string[];
+  currency: string
+  capital: string
 };
 
 export function useFetchCountry(countryCode: string) {
@@ -27,6 +29,8 @@ export function useFetchCountry(countryCode: string) {
             states {
               name
             }
+            currency
+            capital
           }
         }
       `,

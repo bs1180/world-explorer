@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Header } from "../components/Header";
+import { Layout } from "../components/Layout";
 import { CountryInfo } from "../components/CountryInfo";
 import { Search } from "../components/Search";
 
@@ -11,19 +11,15 @@ const IndexPage = () => {
   } = router;
 
   return (
-    <div className="bg-green-50 min-h-screen">
-      <div className="flex flex-col items-center max-w-lg w-full p-8 mx-auto">
-        <Header />
+    <Layout>
+      <Search
+        onSelect={(code) =>
+          router.push(`/?country=${code}`, undefined, { shallow: true })
+        }
+      />
 
-        <Search
-          onSelect={(code) =>
-            router.push(`/?country=${code}`, undefined, { shallow: true })
-          }
-        />
-
-        {country && <CountryInfo isoCode={country} />}
-      </div>
-    </div>
+      {country && <CountryInfo isoCode={country} />}
+    </Layout>
   );
 };
 

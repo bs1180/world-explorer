@@ -1,10 +1,17 @@
 import { useFetchCountry } from '../hooks/useFetchCountry'
 
+const FactCard = ({ title, body }) => {
+  return body ? <div className="p-8">
+    <dd className="font-bold">{ title }</dd>
+    <dt className="">{ body }</dt>
+  </div> : null
+}
+
 export const CountryInfo = ({ isoCode }) => {
   const { data, isLoading, error } = useFetchCountry(isoCode)
 
   if (isLoading) {
-    return <div>loading</div>
+    return <div data-testId="loading-spinner" className="p-32">Loading...</div>
   }
 
   if (error) {
@@ -18,15 +25,13 @@ export const CountryInfo = ({ isoCode }) => {
   const { country } = data
   
   return (
-    <dl>
-      <dt>name</dt>
-      <dd>{ country.nativeName }</dd>
-      <dt>languages</dt>
-      <dd>{ country.languages.join(", ") }</dd>
-      <dt>currency</dt>
-      <dd>{ country.languages.join(", ") }</dd>
-      <dt>states</dt>
-      <dd>{ country.states.join(", ") }</dd>
+    <dl className="bg-red-300 flex flex-wrap">
+      <FactCard title="Name" body={country.nativeName} />
+      <FactCard title="Currency" body={country.currency} />
+      <FactCard title="Capital" body={country.capital} />
+      <FactCard title="Languages" body={country.languages.join(", ")} />
+      <FactCard title="States" body={country.states.join(", ")} />
+
     </dl>
   );
 };
