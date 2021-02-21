@@ -11,7 +11,7 @@ export const CountryInfo = ({ isoCode }) => {
   const { data, isLoading, error } = useFetchCountry(isoCode)
 
   if (isLoading) {
-    return <div data-testId="loading-spinner" className="p-32">Loading...</div>
+    return <div data-testid="loading-spinner" className="p-32">Loading...</div>
   }
 
   if (error) {
