@@ -1,7 +1,7 @@
 import { request, gql } from "graphql-request";
 import { useQuery } from "react-query";
 
-const ENDPOINT = "https://countries.trevorblades.com/";
+const { NEXT_PUBLIC_GRAPHQL_API } = process.env
 
 export type Country = {
   name: string;
@@ -16,7 +16,7 @@ export type Country = {
 export function useFetchCountry(countryCode: string) {
   return useQuery<{country: Country}>(["country", countryCode], async () => {
     const res = await request(
-      ENDPOINT,
+      NEXT_PUBLIC_GRAPHQL_API,
       gql`
         query GetCountry($countryCode: ID!) {
           country(code: $countryCode) {
