@@ -1,41 +1,31 @@
-# TypeScript Next.js example
+# World Explorer
+## What choices did you make and why?
+I used [Next.js](https://nextjs.org/) as a framework, because I'm familar with it and it provides a sensible starting point.
+The main autocomplete component is built on [Reach UI](https://reach.tech/combobox), and is based closely on the Clientside Search example. A good quality autocomplete has several complex behaviours (such as keyboard support and being fully accessible), and this library provides an unstyled, well tested component to use.
+[React Query](https://github.com/tannerlinsley/react-query) and [GraphQL request](https://github.com/prisma-labs/graphql-request) are used for the HTTP requests, because I like the hook based approach.
+[Tailwind](https://tailwindcss.com/) takes care of the styling, which I love because it has no runtime overhead (unlike CSS-in-JS solutions) and avoids creating extravenous intermediate components (eg. Container or Stack).
+[Vercel](https://vercel.com) is used for hosting for convenience.
+I use [Ramda](https://ramdajs.com/) for the filtering of search results - although it may be slightly unfamilar at first, I'm a firm believer than composing simple functors together is the best way to manipulate data.
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+## What challenges did you face?
+I initially thought I'd impress by writing an autocomplete from scratch, then realised just how many edges cases there are!
+Ramda has terrible support for Typescript unfortunately, due to TS having poor support for generics.
 
-## Deploy your own
+## What tradeoffs did you choose?
+I fetch all the countries up front and perform the filtering on the client. This is due to limitations of the API but is acceptable given the small result set. Alternatively this data could be hardcoded (countries rarely come and go!) or, if more complex searching is required, could take place on the server.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+## What do you like and not like about your solution?
+It's quite boring asthetically - I'm not the best designer!
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
+I think the architecture is sensible - the two main components (`Search` and `CountryInfo`) are independent of each other and independent of the Next framework, so could be reused elsewhere with minimal work.
 
-## How to use it?
+The URL is used as the source of truth for the selected country (rather than, say, internal component state) - this is useful for sharing results. 
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+There are unit tests for the most important behaviours.
+## What areas would you work on next?
+The searching is quite simple, just case-insensitive filtering of the country names. This could be improved by better ordering of suggestions (so results that match the start of the country name comes first) or even handling misspellings etc.
 
-```bash
-npx create-next-app --example with-typescript with-typescript-app
-# or
-yarn create next-app --example with-typescript with-typescript-app
-```
+I skipped integration testing with the API, and tests for the hooks since they're mainly wrappers for React Query. However there is some untested behaviour, due to time constraints.
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
 
-## Notes
-
-This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
-
-```
-npm install --save-dev typescript
-```
-
-To enable TypeScript's features, we install the type declarations for React and Node.
-
-```
-npm install --save-dev @types/react @types/react-dom @types/node
-```
-
-When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
-
-Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
-
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
+Illustration is from https://illlustrations.co/
