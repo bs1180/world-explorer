@@ -1,15 +1,19 @@
 # World Explorer
+
+See live: https://react-world-explorer.vercel.app
 ## What choices did you make and why?
-I used [Next.js](https://nextjs.org/) as a framework, because I'm familar with it and it provides a sensible starting point.
-The main autocomplete component is built on [Reach UI](https://reach.tech/combobox), and is based closely on the Clientside Search example. A good quality autocomplete has several complex behaviours (such as keyboard support and being fully accessible), and this library provides an unstyled, well tested component to use.
-[React Query](https://github.com/tannerlinsley/react-query) and [GraphQL request](https://github.com/prisma-labs/graphql-request) are used for the HTTP requests, because I like the hook based approach.
-[Tailwind](https://tailwindcss.com/) takes care of the styling, which I love because it has no runtime overhead (unlike CSS-in-JS solutions) and avoids creating extravenous intermediate components (eg. Container or Stack).
-[Vercel](https://vercel.com) is used for hosting for convenience.
-I use [Ramda](https://ramdajs.com/) for the filtering of search results - although it may be slightly unfamilar at first, I'm a firm believer than composing simple functors together is the best way to manipulate data.
+- I used [Next.js](https://nextjs.org/) as a framework, because I'm familar with it and it provides a sensible starting point.
+- The main autocomplete component is built on [Reach UI](https://reach.tech/combobox), and is based closely on the Clientside Search example. A good quality autocomplete has several complex behaviours (such as keyboard support and being fully accessible), and this library provides an unstyled, well tested component to use.
+- [React Query](https://github.com/tannerlinsley/react-query) and [GraphQL request](https://github.com/prisma-labs/graphql-request) are used for the HTTP requests, because I like the hook based approach.
+- [Tailwind](https://tailwindcss.com/) takes care of the styling, which I love because it has no runtime overhead (unlike CSS-in-JS solutions) and avoids creating extravenous intermediate components (eg. "Container" or "Stack" just to hold styles).
+- [Vercel](https://vercel.com) is used for hosting for convenience.
+- I use [Ramda](https://ramdajs.com/) for the filtering of search results - although it may be slightly unfamilar at first, I'm a firm believer than composing simple functors together is the best way to manipulate data.
 
 ## What challenges did you face?
 I initially thought I'd impress by writing an autocomplete from scratch, then realised just how many edges cases there are!
 Ramda has terrible support for Typescript unfortunately, due to TS having poor support for generics.
+
+I'd forgotten how awkward setting up Jest with Typescript was :scream:
 
 ## What tradeoffs did you choose?
 I fetch all the countries up front and perform the filtering on the client. This is due to limitations of the API but is acceptable given the small result set. Alternatively this data could be hardcoded (countries rarely come and go!) or, if more complex searching is required, could take place on the server.
@@ -27,5 +31,6 @@ The searching is quite simple, just case-insensitive filtering of the country na
 
 I skipped integration testing with the API, and tests for the hooks since they're mainly wrappers for React Query. However there is some untested behaviour, due to time constraints.
 
+---
 
 Illustration is from https://illlustrations.co/
