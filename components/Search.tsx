@@ -25,9 +25,9 @@ export const Search: React.FC<Props> = ({ onSelect }) => {
   };
 
   return (
-    <Combobox aria-label="Country search" onSelect={handleSelect}>
+    <Combobox aria-label="Country search" onSelect={handleSelect} className="w-full">
       <ComboboxInput
-        className="border text-xl px-4 py-4 rounded-lg"
+        className="border text-xl px-4 py-4 rounded-lg w-full"
         placeholder="Where will you learn about?"
         onChange={handleChange}
       />

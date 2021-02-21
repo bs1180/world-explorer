@@ -9,7 +9,9 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      scale: ['focus-within'],
+    },
   },
   plugins: [],
 }
