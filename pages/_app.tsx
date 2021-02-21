@@ -1,8 +1,15 @@
-import "tailwindcss/tailwind.css";
+import { useRef } from 'react'
+import "../styles/styles.css";
 import type { AppProps } from 'next/app'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+  const queryClientRef = useRef()
+  if (!queryClientRef.current) {
+    queryClientRef.current = new QueryClient()
+  }
+
+  return <QueryClientProvider client={queryClientRef.current}><Component {...pageProps} /></QueryClientProvider>
 }
 
 export default MyApp

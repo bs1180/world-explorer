@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.grid > div {
+  display: grid;
+  place-items: center;
+}
+
+.grid > div::before {
+  content: "";
+  padding-top: 100%;
+  display: block;
+  grid-area: 1/1/2/2;
+}
+
+.grid > div > div {
+  grid-area: 1/1/2/2;
+}
